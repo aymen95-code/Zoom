@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block content %}
+    <!-- Navigation Bar -->
+    {% include 'navbar.html' %}
+    <div class="container">
+		<h1 class="mt-5">Basic Information</h1>
+		<div class="media bg-white">
+			<img class="account-img" src="{{ image_file }}" width="190px" height="255px">
+			<div class="media-body h-100 d-flex flex-column justify-content-center ml-4">
+				<p> <strong>Username: </strong><span class="text-secondary">{{ user.username }}</span></p>
+				<p> <strong>Email: </strong><span class="text-secondary">{{ user.email }}</span></p>
+				<p> <strong>Departement: </strong><span class="text-secondary">{{ user.dept }}</span></p>
+				<p> <strong>Role: </strong><span class="text-secondary">Admin</span></p>
+				<p> <strong>Date of birth: </strong><span class="text-secondary">dd/mm/yy</span></p>
+				<p class="mb-0"> <strong>Gender: </strong><span class="text-secondary">{{ user.gender }}</span></p>
+			</div>
+		</div>
+		<!-- List of posts -->
+		<div class="list-of-posts mb-4">
+			<h1 class="mt-5">Posts Written By {{ user.username }}</h1>
+			{% if posts %}
+				<div class="list-group">
+					{% for post in posts %}
+						<a href="{{ url_for('post.get_post', post_id=post.id) }}" class="list-group-item list-group-item-action url-post">
+							<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-circle-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+								<path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-11.5.5a.5.5 0 0 1 0-1h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5z"/>
+							</svg>
+							{{ post.title }}
+						</a>
+					{% endfor %}
+				</div>	
+<!-- 				<ul>
+					{% for post in posts %}
+						<li>
+							<a href="{{ url_for('post.get_post', post_id=post.id) }}" class="url-post">
+								<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-circle-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+									<path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-11.5.5a.5.5 0 0 1 0-1h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5z"/>
+								</svg>
+								{{ post.title }}
+							</a>
+						</li>
+					{% endfor %}
+				</ul> -->
+			{% else %}
+				<p class="text-center my-4">{{ user.username }} Did not write any posts</p>
+			{% endif %}
+		</div>
+    </div>
+{% endblock %}

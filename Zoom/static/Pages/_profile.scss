@@ -1,0 +1,15 @@
+.media {
+    height: 255px;
+}
+
+.list-of-posts {
+    .url-post {
+        color: #000;
+        font-weight: bold;
+        transition: all .5s;
+        &:hover {
+            color: #007bff;
+            padding-left: 30px;
+        }
+    }
+}

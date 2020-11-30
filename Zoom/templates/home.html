@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+    <main class="index">
+        <div class="container d-flex flex-column">
+            <nav class="d-flex justify-content-start align-items-center">
+                <div class="brand">
+                    <a href="{{ url_for('main.home') }}">
+                        Zoom
+                    </a>
+                </div>
+            </nav>
+            <section class="info d-flex flex-grow-1">
+                <div class="row h-100">
+                    <div class="col-md-6 col-lg-6 d-flex flex-column justify-content-center">
+                        <h1 style="font-weight: bold;">Join More than <span class="text-primary">+10,000</span> Blogger</h1>
+                        <p>We care about community, knowledge :)</p>
+                        <div class="auth-links">
+                            <a href="{{ url_for('auth.login') }}" class="btn btn-primary">Login</a>
+                            <a href="{{ url_for('auth.register') }}" class="btn btn-info">Register</a>
+                        </div>
+                    </div> 
+                    <div class="col-md-6 col-lg-6 d-flex justify-content-center align-items-center">
+                        <img src="{{ url_for('static', filename='img/background.svg') }}" alt="" srcset="">
+                    </div> 
+                </div>
+            </section>
+        </div>
+    </main>
+{% endblock %}

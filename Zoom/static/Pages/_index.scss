@@ -1,0 +1,82 @@
+$nav-height: 70px;
+.index {
+    background-color: #fff;
+    min-height: 100vh;
+    nav {
+        height: $nav-height;
+        justify-content: space-around;
+        .brand {
+            a {
+                font-size: 1.75rem;
+            }
+        }
+    }
+    .container {
+        height: 100vh-11.475409836065573vh;
+        img {
+            width: 80%;
+        }
+    }
+}
+
+.home-auth {
+    .latest-posts {
+        h1 {
+            margin-bottom: 2rem;
+            font-weight: bold;
+        }
+        article {
+            border-radius: 15px;
+            box-shadow: 2px 2px 30px #f0f0f0;
+            figure {
+                img {
+                    border-top-left-radius: 15px;
+                    border-top-right-radius: 15px;
+                }
+                
+            }
+            .article-details {
+                .post-title{
+                    color: #000;
+                    transition: all .5s;
+                    h2 {
+                        font-weight: bold;
+                    }
+                    &:hover {
+                        color: #007bff;
+                        text-decoration: none;
+                    }
+                }
+                .post-details {
+                    .post-username {
+                        color: #000;
+                    }
+                    .post-date {
+                        font-weight: bold;
+                    }
+                }
+                .post-snippet {
+                    font-size: 17px;
+                    color: #8c8c8c;
+                    margin: .6rem 0;
+                }
+            }
+        }
+    }
+    .side-bar {
+        .current-user-account {
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+            background-color: transparent;
+            box-shadow: 2px 18px 16px #f0f0f0;
+            img {
+                border-top-left-radius: 15px;
+                border-top-right-radius: 15px;
+            }
+            .profile-info {
+                border-bottom-left-radius: 15px;
+                border-bottom-right-radius: 15px;
+            }
+        }
+    }
+}

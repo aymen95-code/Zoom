@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block content %}
+    <!-- Navigation Bar -->
+    {% include 'navbar.html' %}
+    <div class="container">
+        <div class="main-form my-4">
+            <h1 class='text-center'>Edit post</h1>
+            <form action="" method="POST" enctype="multipart/form-data">
+                {{ form.hidden_tag() }}
+                <div class="form-group">
+                    {{ form.title.label }}
+                    {{ form.title(class="form-control form-control-lg") }}
+                </div>
+                <div class="form-group">
+                    {{ form.snippet.label }}
+                    {{ form.snippet(class="form-control form-control-lg") }}
+                </div>
+                <div class="form-group">
+                    {{ form.content.label }}
+                    {{ form.content() }}
+                </div>
+                <!-- Change Photo -->
+                <div class="form-group">
+                    {{ form.picture.label() }}
+                    {{ form.picture(class="form-control-file") }}
+    
+                    {% if form.picture.errors %}
+                        {% for error in form.picture.errors %}
+                            <span class="text-danger">{{ error }}</span></br>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.submit(class="btn btn-success btn-lg") }}
+                    <a href="{{ url_for('main.home') }}" class="btn btn-info">Cancel</a>
+                </div>
+            </form>    
+        </div>   
+    </div>
+    {{ ckeditor.load(pkg_type="full") }}
+    {{ ckeditor.config(name='content') }}
+{% endblock %}

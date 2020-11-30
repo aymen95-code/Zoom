@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+{% block content %}
+    <main class="auth">
+        <form action="" method="post">
+            <legend class="text-center">Join Now</legend>
+            {{ form.hidden_tag() }}
+            <fieldset>
+                <div class="form-group">
+                    {{ form.username.label }}
+                    {% if form.username.errors %}
+                        {{ form.username(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.username.errors %}
+                                <span class="form-text">{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.username(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <!-- Email Field -->
+                <div class="form-group">
+                    {{ form.email.label }}
+                    {% if form.email.errors %}
+                        {{ form.email(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.email.errors %}
+                                <span class="form-text">{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.email(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <!-- Password Field -->
+                <div class="form-group">
+                    {{ form.password.label }}
+                    {% if form.password.errors %}
+                        {{ form.password(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.password.errors %}
+                                <span class="form-text">{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.password(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <!-- Confirm Password Field -->
+                <div class="form-group">
+                    {{ form.confirm_password.label }}
+                    {% if form.confirm_password.errors %}
+                        {{ form.confirm_password(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.confirm_password.errors %}
+                                <span class="form-text">{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.confirm_password(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <!-- Departement Select Field -->
+                <div class="form-group">
+                    {{ form.dept.label }}
+                    <select class="custom-select" name="dept" id="dept">
+                        {% for subfield in form.dept %}
+                            {{ subfield }}
+                        {% endfor %}
+                        {% if form.dept.errors %}
+                            <div class="invalid-feedback">
+                                {% for error in form.dept.errors %}
+                                    <span class="form-text">{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+ -->                </select>
+                </div>
+                <!-- Gender Select Field -->
+                <div class="form-group">
+                    {{ form.gender.label }}
+                    {% for subfield in form.gender %}
+                        <tr>
+                            <td>{{ subfield }}</td>
+                            <td>{{ subfield.label }}</td>
+                        </tr>
+                    {% endfor %}
+                    {% if form.gender.errors %}
+                        <div class="invalid-feedback">
+                            {% for error in form.gender.errors %}
+                                <span class="form-text">{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+                <!-- Submit Button -->
+                <div class="form-group">
+                    {{ form.submit(class="btn btn-primary") }}
+                    <input type="reset" value="reset" class="btn btn-danger">
+                </div>          
+            </fieldset>
+            <small>Already have an account? <a href="{{ url_for('auth.login') }}">Login</a></small>
+            <p>
+                <small>
+                    <a href="{{ url_for('main.home') }}">Back to the home page</a>
+                </small>    
+            </p>        
+            </form>
+    </main>
+{% endblock %}

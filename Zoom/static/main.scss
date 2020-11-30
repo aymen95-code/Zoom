@@ -1,0 +1,9 @@
+body {
+    background-color: #f8f9fa;
+    font-family: 'Quicksand', sans-serif;
+}
+
+@import './Pages/auth';
+@import './Pages/index';
+@import './Pages/profile';
+@import './Pages/post';

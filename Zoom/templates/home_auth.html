@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block content %}
+    <!-- Navigation Bar -->
+    {% include 'navbar.html' %}
+    <main class="home-auth">
+        <div class="container">
+            <div class="row">
+                <div class="latest-posts col-lg-9 my-5">
+                    <!-- Message Flashing -->
+                    {% include 'flash.html' %}
+                    <h1 class='text-center'>Latest Posts</h1>
+                    {% if posts %}
+                        {% for post in posts %}
+                        <article class="bg-white">
+                            <figure>
+                                <img src="{{ url_for('static', filename='post_pics/' + post.cover_pic_file) }}" alt="" srcset="" width="100%" height="350">
+                            </figure>
+                            <div class="article-details px-5 pb-3 mb-4">
+                                <a href="{{ url_for('post.get_post', post_id=post.id) }}" class="post-title">
+                                    <h2 class="text-center">{{ post.title }}</h2>
+                                </a>
+                                <div class="post-details d-flex justify-content-around flex-wrap">
+                                    <span>{{ post.comments.count() }} Comments</span>
+                                    <span>
+                                        Written By 
+                                        <a href="{{ url_for('user.account', username=post.author.username) }}" class="post-username">
+                                            {{ post.author.username }}
+                                        </a>
+                                    </span>
+                                    <span class="post-date">Published At : {{ post.date_posted.strftime('%Y-%m-%d') }}</span>
+                                </div>
+                                <p class="post-snippet">{{ post.snippet }}</p>
+                                <a href="{{ url_for('post.get_post', post_id=post.id) }}" class="btn btn-primary">
+                                    Read More..
+                                </a>
+                            </div>
+                        </article>
+                        {% endfor %}
+                    {% else %}
+                        <p class="text-center my-4">There're no posts</p>
+                    {% endif %}
+                </div>
+                <div class="side-bar col-lg-2 my-4 ml-4 p-0">
+                    <div class="current-user-account">
+                        <img src="{{ profile_file_source }}" alt="" srcset="" width="100%">
+                        <div class="profile-info pt-2 pb-3 bg-white text-center">
+                            <legend>{{ current_user.username }}</legend>
+                            <small><strong>following:</strong> 51</small>
+                            <br>
+                            <small><strong>followers:</strong> 22</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}

@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+{% block content %}
+<!-- Navigation Bar -->
+{% include 'navbar.html' %}
+    <main class="post">
+        <div class="post-background mb-5" style="background-image: url(../static/post_pics/{{ post.cover_pic_file }});">
+            <div class="overlay">
+                <div class="post-title text-center d-flex px-2 flex-column align-items-center justify-content-center h-100">
+                    <h1><strong>{{ post.title }}</strong></h1>
+                    <span>{{ post.author.username }}</span>
+                    <span>{{ post.date_posted.strftime('%Y-%m-%d') }}</span>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <!-- POST SECTION -->
+            <section class="post-content bg-white">
+                <p>{{ post.post_content | safe }}</p>
+                {% if current_user == post.author %}
+                    <div class="d-flex justify-content-center">
+                        <a href="{{ url_for('post.edit_post', post_id=post.id) }}" class="btn btn-primary mr-4">Edit</a>
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">
+                            Delete post
+                        </button>
+                    </div>
+                {% endif %}
+            </section>
+    
+            <!-- COMMENT SECTION -->
+            <section class="comment-form my-5">
+                <form action="" method="post">
+                    {{ form.hidden_tag() }}
+                    <fieldset>
+                        <!-- Email Field -->
+                        <div class="form-group">
+                            <h3>Add a Comment</h3>
+                            {% if form.body.errors %}
+                                {{ form.body(class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form.body.errors %}
+                                        <span class="form-text">{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form.body(class="form-control form-control-lg") }}
+                            {% endif %}
+                        </div>
+                        <!-- Submit Button -->
+                        <div class="form-group d-flex justify-content-end">
+                            {{ form.submit(class="btn btn-primary") }}
+                        </div>          
+                    </fieldset>
+                </form>
+            </section>
+    
+            {% if comments %}
+                <section class="comments-section mb-5">
+                    <h3 class="mb-4">{{ post.comments.count() }} Comments</h3>
+                    {% for comment in comments %}
+                        <article class="comment bg-white py-3 px-4 mb-3">
+                            <div class="comment-author d-flex align-items-center">
+                                <img src="{{ url_for('static', filename='profile_pics/' + comment.author.profile_file) }}" width="30px" height="30px" class="rounded-circle" alt="profile-picture">
+                                <p class="font-weight-bold mb-0 ml-2">{{ comment.author.username }}</p>
+                            </div>
+                            <p class="comment-content">{{ comment.comment_content }}</p>
+                            {% if current_user == comment.author %}
+                                <form action="{{ url_for('post.delete_comment', comment_id=comment.id, post_id=post.id) }}" method="post" class="d-flex justify-content-end mt-2">
+                                    <input type="submit" value="Delete Comment" class="btn btn-danger">
+                                </form>
+                            {% endif %}
+                        </article>
+                    {% endfor %}
+                </section>
+            {% else %}
+                <p class="text-center mb-4">There are no comments on this post</p>
+            {% endif %}
+    
+            <!-- Modal -->
+            <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="deleteModalLabel">Are you sure you want to continue??</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            By pursuading this action, you will not have the ability to go back
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <form action="{{ url_for('post.delete_post', post_id=post.id) }}" method="POST">
+                                <input type="submit" class="btn btn-danger" value="Confirm">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}
