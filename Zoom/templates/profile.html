@@ -28,22 +28,17 @@
 							{{ post.title }}
 						</a>
 					{% endfor %}
-				</div>	
-<!-- 				<ul>
-					{% for post in posts %}
-						<li>
-							<a href="{{ url_for('post.get_post', post_id=post.id) }}" class="url-post">
-								<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-circle-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-									<path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-11.5.5a.5.5 0 0 1 0-1h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5z"/>
-								</svg>
-								{{ post.title }}
-							</a>
-						</li>
-					{% endfor %}
-				</ul> -->
+				</div>
 			{% else %}
 				<p class="text-center my-4">{{ user.username }} Did not write any posts</p>
 			{% endif %}
 		</div>
+		{% if user == current_user %}
+			<div>
+				<form action="{{ url_for('user.delete_user', user_id=user.id) }}" method="post">
+					<input type="submit" class="btn btn-danger" value="Delete Account">
+				</form>
+			</div>
+		{% endif %}
     </div>
 {% endblock %}

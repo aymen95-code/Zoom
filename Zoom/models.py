@@ -17,7 +17,7 @@ class User(db.Model, UserMixin):
     gender = db.Column(db.String(10), nullable=False, default="Male")
     profile_file = db.Column(db.String(20), nullable=False, default='default.jpg')
     posts = db.relationship('Post', backref='author', lazy=True)
-    comments = db.relationship('Comment', backref='author', lazy='dynamic')
+    comments = db.relationship('Comment', backref='author', lazy=True)
     
     def __repr__(self):
         return f"<User {self.username}, {self.gender}>"

@@ -34,7 +34,7 @@ def get_post(post_id):
       return redirect(url_for('post.get_post', post_id=post.id))
    # getting comments for the current post
    comments = Comment.query.filter_by(post_id=post_id).all()
-   return render_template('post.html', title=post.title, post=post, form=form, comments=comments)
+   return render_template('post.html', title=post.title, post=post, form=form, comments=comments, code=True)
 
 @post.route('/post/<int:post_id>/edit', methods=['GET', 'POST'])
 @login_required

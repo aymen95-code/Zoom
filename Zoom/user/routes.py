@@ -37,5 +37,14 @@ def update_account(username):
     form.gender.data = user.gender
     return render_template('editProfile.html', title="Edit Profile", form=form)
     
-
+@user.route('/user/<int:user_id>/delete', methods=['POST'])
+@login_required
+def delete_user(user_id):
+    user = User.query.get_or_404(user_id)
+    if user != current_user:
+        abort(403)
+    db.session.delete(user)
+    db.session.commit()
+    flash(f'{user.username} Has been deleted', 'success')
+    return redirect(url_for('auth.logout'))
     
