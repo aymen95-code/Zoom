@@ -46,7 +46,7 @@ class Comment(db.Model):
     post_id = db.Column(db.Integer, db.ForeignKey('posts.id'))
 
     def __repr__(self):
-        return f"<Comment {self.comment_content}, {self.author.username}>"
+        return f"<Comment {self.comment_content}>"
 
 class Follow(db.Model):
     __tablename__ = 'follows'
